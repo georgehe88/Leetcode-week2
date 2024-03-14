@@ -1,0 +1,16 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        l = 0
+        freq = {}
+        maxlen = 0
+        for r in range(len(s)):
+            if not s[r] in freq:
+                freq[s[r]] = 0
+            freq[s[r]] +=1
+            curlen = r-l+1
+            if curlen - max(freq.values()) <= k:
+                maxlen = max(maxlen, curlen)
+            else:
+                freq[s[l]] -=1
+                l+=1
+        return maxlen
